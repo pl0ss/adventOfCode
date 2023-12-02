@@ -4,18 +4,13 @@ const input = ["7jlncfksix7rjgrpglmn9", "vcgkgxninerqjltdbhqzzpd4nine23", "fx3",
 
 const num_words = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
 
-c = 0
+
 function calc(){
     let sum = 0;
 
     input.forEach(str => {
-        // str = number_replace2(str);
-        // console.log(str, number_replace2(str))
         new_int = get_first_int(str) * 10 + get_last_int(str);
-        // console.log(new_int, str)
-        console.log(new_int)
         sum += new_int;
-        c++
     });
 
     return sum;
@@ -26,17 +21,13 @@ function get_first_int(str){
         if(!isNaN(Number(str[i]))){
             return Number(str[i]);
         } else {
-            // num_words.forEach(num_word => { // return geht in forEach nicht
             for (let j = 0; j < num_words.length; j++) {
                 let num_word = num_words[j]
                 
-                //DEBUG console.log(i, str.substring(i, i + num_word.length), num_word, str.substring(i, i + num_word.length) == num_word, (num_words.indexOf(num_word) +1))
                 if(!(str.length >= i + num_word.length)){
                 } else if(str.substring(i, i + num_word.length) == num_word) {
-                    // str = str.replace(num_word, String(num_words.indexOf(num_word) +1));
                     return (num_words.indexOf(num_word) +1);
                 }
-            //});
             };
         }
     }
@@ -47,64 +38,16 @@ function get_last_int(str){
         if(!isNaN(Number(str[i]))){
             return Number(str[i]);
         } else {
-            // num_words.forEach(num_word => { // return geht in forEach nicht
             for (let j = 0; j < num_words.length; j++) {
                 let num_word = num_words[j]
                 
-                //DEBUG console.log(i, str.substring(i, i + num_word.length), num_word, str.substring(i, i + num_word.length) == num_word, (num_words.indexOf(num_word) +1))
                 if(!(str.length >= i + num_word.length)){
                 } else if(str.substring(i, i + num_word.length) == num_word) {
-                    // str = str.replace(num_word, String(num_words.indexOf(num_word) +1));
                     return (num_words.indexOf(num_word) +1);
                 }
-            //});
             };
         }
     }
 }
 
-function number_replace(str){
-    str = str.replace(/one/gi, 1);
-    str = str.replace(/two/gi, 2);
-    str = str.replace(/three/gi, 3);
-    str = str.replace(/four/gi, 4);
-    str = str.replace(/five/gi, 5);
-    str = str.replace(/six/gi, 6);
-    str = str.replace(/seven/gi, 7);
-    str = str.replace(/eight/gi, 8);
-    str = str.replace(/nine/gi, 9);
-
-    return str;
-}
-
-
-function number_replace2(str){
-    // console.log(str)
-    for (let i = 0; i < str.length; i++) {
-        j = 0;
-        num_words.forEach(num_word => {
-            // console.log(str.replace(num_word, j +1))
-            // console.log(str.substring(i, i + num_word.length), str.substring(i, i + num_word.length) == num_word)
-            if(!(str.length >= i + num_word.length)){ //Zeitersparniss //! mit und ohne testen
-            } else if(str.substring(i, i + num_word.length) == num_word) {
-                // console.log("---------------")
-                str = str.replace(num_word, String(num_words.indexOf(num_word) +1));
-                str = str.replace(num_word, String(j +1));
-            }
-
-            j++;
-        });
-        // console.log(i, str)
-        // console.log(" ")
-    }
-    // if(c < 10){
-    //     console.log(c, str)
-    // }
-    return str;
-}
-
 console.log(calc()) //: 55614
-
-// console.log(number_replace2(input[61]))
-
-// console.log(get_first_int(input[1]))
