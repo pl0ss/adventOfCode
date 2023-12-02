@@ -2,15 +2,20 @@ const input = ["7jlncfksix7rjgrpglmn9", "vcgkgxninerqjltdbhqzzpd4nine23", "fx3",
 
 // const input = ["two1nine", "eightwothree", "abcone2threexyz", "xtwone3four", "4nineeightseven2", "zoneight234", "7pqrstsixteen"];
 
+const num_words = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
+
+c = 0
 function calc(){
     let sum = 0;
 
     input.forEach(str => {
-        str = number_replace2(str);
+        // str = number_replace2(str);
         // console.log(str, number_replace2(str))
         new_int = get_first_int(str) * 10 + get_last_int(str);
         // console.log(new_int, str)
+        console.log(new_int)
         sum += new_int;
+        c++
     });
 
     return sum;
@@ -20,6 +25,19 @@ function get_first_int(str){
     for (let i = 0; i < str.length; i++) {
         if(!isNaN(Number(str[i]))){
             return Number(str[i]);
+        } else {
+            // num_words.forEach(num_word => { // return geht in forEach nicht
+            for (let j = 0; j < num_words.length; j++) {
+                let num_word = num_words[j]
+                
+                //DEBUG console.log(i, str.substring(i, i + num_word.length), num_word, str.substring(i, i + num_word.length) == num_word, (num_words.indexOf(num_word) +1))
+                if(!(str.length >= i + num_word.length)){
+                } else if(str.substring(i, i + num_word.length) == num_word) {
+                    // str = str.replace(num_word, String(num_words.indexOf(num_word) +1));
+                    return (num_words.indexOf(num_word) +1);
+                }
+            //});
+            };
         }
     }
 }
@@ -28,6 +46,19 @@ function get_last_int(str){
     for (let i = str.length -1; i >= 0; i--) {
         if(!isNaN(Number(str[i]))){
             return Number(str[i]);
+        } else {
+            // num_words.forEach(num_word => { // return geht in forEach nicht
+            for (let j = 0; j < num_words.length; j++) {
+                let num_word = num_words[j]
+                
+                //DEBUG console.log(i, str.substring(i, i + num_word.length), num_word, str.substring(i, i + num_word.length) == num_word, (num_words.indexOf(num_word) +1))
+                if(!(str.length >= i + num_word.length)){
+                } else if(str.substring(i, i + num_word.length) == num_word) {
+                    // str = str.replace(num_word, String(num_words.indexOf(num_word) +1));
+                    return (num_words.indexOf(num_word) +1);
+                }
+            //});
+            };
         }
     }
 }
@@ -46,9 +77,10 @@ function number_replace(str){
     return str;
 }
 
-const num_words = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
+
 function number_replace2(str){
-    for (let i = 0; i < num_words.length; i++) {
+    // console.log(str)
+    for (let i = 0; i < str.length; i++) {
         j = 0;
         num_words.forEach(num_word => {
             // console.log(str.replace(num_word, j +1))
@@ -63,10 +95,16 @@ function number_replace2(str){
             j++;
         });
         // console.log(i, str)
+        // console.log(" ")
     }
+    // if(c < 10){
+    //     console.log(c, str)
+    // }
     return str;
 }
 
-console.log(calc()) //: 55956
+console.log(calc()) //: 55614
 
-// console.log(number_replace2(input[0]))
+// console.log(number_replace2(input[61]))
+
+// console.log(get_first_int(input[1]))
