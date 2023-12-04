@@ -9,7 +9,7 @@ const input = `...788.............................54.........501...........555..
 ..673/.....957...............103..104............................../..&.....888......408*703.....................@......896..4..526.........
 .......628....*..62.......15.....................885.............649.720.............................93........703..........#..*............
 ...*....*....222..*.........*795..........%...+...#.....54.310.....................622....916.......=......./.........../.......493......956
-.418.*..57........125...141.........965..382..177.......*.....-.......390.....801....*.....&...659....406....912........614.448.............
+418..*..57........125...141.........965..382..177.......*.....-.......390.....801....*.....&...659....406....912........614.448.............
 ....926...................*.#.........%.................517......*......%........%.301............$........*.......694......$......&........
 ..............$476....167....208..866...............86........818.200........588.......@....%.............534.....................324.......
 ...571.977...............*...........*551...................................%.....992..172...849.................578........814.............
@@ -152,10 +152,16 @@ const input_test = `467..114..
 ...$.*....
 .664.598..`
 
+const input_test2 = `...*....*....2
+418..*..
+.........
+`
+
 
 function clac(input){
     symbol_pos = get_symbol_pos(input);
     num_pos = get_num_pos(input);
+    //console.log(num_pos)
 
     sum = 0;
 
@@ -165,8 +171,13 @@ function clac(input){
     for (let i = 0; i < num_pos.length; i++) {
         y = num_pos[i][0];
         adjacent = false;
+        //console.log(num_pos[i][1] -1, num_pos[i][2] +1)
         for (let x = num_pos[i][1] -1; x <= num_pos[i][2] +1; x++) {
             // console.log(y, x)
+            // if(symbol_pos[y -1] != undefined){console.log(symbol_pos[y -1].includes(x), y-1, x)}
+            // if(symbol_pos[y] != undefined){console.log(symbol_pos[y].includes(x), y, x)}
+            // if(symbol_pos[y +1] != undefined){console.log(symbol_pos[y +1].includes(x), y+1, x)}
+            // console.log(" ")
             if((symbol_pos[y -1] != undefined && symbol_pos[y -1].includes(x))
              || (symbol_pos[y] != undefined && symbol_pos[y].includes(x))
              || (symbol_pos[y +1] != undefined && symbol_pos[y +1].includes(x)) ){
@@ -176,7 +187,7 @@ function clac(input){
         }
         if(adjacent){
             adjacent = false;
-            console.log(Number(num_pos[i][3]))
+            //console.log(Number(num_pos[i][3]))
             sum += Number(num_pos[i][3]);
         }
     }
@@ -204,11 +215,11 @@ function get_symbol_pos(input){
 function get_num_pos(input){
     num_pos = [];
 
-    num_x_start = undefined;
-    num_x_end = undefined;
-    number_str = "";
     for (let y = 0; y < input.split("\n").length; y++) {
-        line = input.split("\n")[y]
+        line = input.split("\n")[y];
+        num_x_start = undefined;
+        num_x_end = undefined;
+        number_str = "";
         for (let x = 0; x < line.length; x++) {
             char = line[x]
             if(!isNaN(Number(char))){
@@ -225,6 +236,12 @@ function get_num_pos(input){
                 num_x_end = undefined;
                 number_str = ""
             }
+        }
+        if(num_x_start != undefined){
+            num_pos.push([y, num_x_start, num_x_end, number_str])
+            num_x_start = undefined;
+            num_x_end = undefined;
+            number_str = ""
         }
     }
 
