@@ -155,31 +155,53 @@ const input_test = `467..114..
 function clac(input){
     symbol_pos = get_symbol_pos(input);
     num_pos = get_num_pos(input);
+    num_pos2 = {};
 
     sum = 0;
 
     // console.log(symbol_pos)
     // console.log(num_pos)
 
-    //! Hier 
-    // for (let i = 0; i < num_pos.length; i++) {
-    //     y = num_pos[i][0];
-    //     adjacent = false;
-    //     for (let x = num_pos[i][1] -1; x <= num_pos[i][2] +1; x++) {
-    //         // console.log(y, x)
-    //         if((symbol_pos[y -1] != undefined && symbol_pos[y -1].includes(x))
-    //          || (symbol_pos[y] != undefined && symbol_pos[y].includes(x))
-    //          || (symbol_pos[y +1] != undefined && symbol_pos[y +1].includes(x)) ){
-    //             adjacent = true;
-    //             break
-    //         }
-    //     }
-    //     if(adjacent){
-    //         adjacent = false;
-    //         console.log(Number(num_pos[i][3]))
-    //         sum += Number(num_pos[i][3]);
-    //     }
-    // }
+    //? Füge alle nummer zu "num_pos2" hinzu, welche ein * berühren
+    //? mit index von der Position von dem Zeichen
+    for (let i = 0; i < num_pos.length; i++) {
+        y = num_pos[i][0];
+        adjacent = false;
+        for (let x = num_pos[i][1] -1; x <= num_pos[i][2] +1; x++) {
+            // console.log(y, x)
+            if((symbol_pos[y -1] != undefined && symbol_pos[y -1].includes(x))){
+                adjacent = true;
+                this_y = y -1;
+            }
+            if((symbol_pos[y] != undefined && symbol_pos[y].includes(x))){
+                adjacent = true;
+                this_y = y;
+            }
+            if((symbol_pos[y +1] != undefined && symbol_pos[y +1].includes(x))){
+                adjacent = true;
+                this_y = y +1;
+            }
+            if(adjacent){
+                if(num_pos2[`${this_y}_${x}`] == undefined){
+                    num_pos2[`${this_y}_${x}`] = []
+                }
+                num_pos2[`${this_y}_${x}`].push(num_pos[i][3])
+                break
+            }
+        }
+    }
+
+    //? Wenn in einem index 2 werte sind, dann multiplizieren und + sum
+    for (const arr in num_pos2) {
+        // console.log(num_pos2[arr])
+        if(num_pos2[arr].length == 1){
+
+        } else if(num_pos2[arr].length == 2){
+            sum += Number(num_pos2[arr][0]) * Number(num_pos2[arr][1])
+        } else {
+            console.log(`Mehr als 2 Elemente: ${arr, num_pos2[arr]}`)
+        }
+    }
 
     return sum;
 }
@@ -238,4 +260,4 @@ function get_num_pos(input){
 }
 
 
-console.log(clac(input_test))
+console.log(clac(input)) //87263515
