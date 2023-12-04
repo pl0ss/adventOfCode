@@ -248,10 +248,10 @@ function clac(input) {
         }
     }
 
-    console.log(cards2check)
-    return
+    // console.log(cards2check.length)
+    
     while (cards2check.length) {
-        console.log(cards2check.length)
+        // console.log(cards2check.length)
         this_id = cards2check.shift();
 
         matches = check_card(String(this_id));
@@ -260,6 +260,10 @@ function clac(input) {
 
         for (let index = 0; index < matches.length; index++) {
             cards2check.push(Number(this_id) + index + 1);
+        }
+
+        if((cards2check.length % 1000) == 0){
+            console.log(cards2check.length)
         }
     }
 
@@ -324,4 +328,4 @@ function pars_numlist(str){
     return num_array;
 }
 
-console.log(clac(input))
+console.log(clac(input)) // 9425061 nach 25min
