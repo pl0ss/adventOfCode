@@ -259,7 +259,7 @@ function clac(input){
     min = undefined;
 
     for (let i = 0; i < data["seeds"].length; i += 2) {
-        console.log(i, "/", data["seeds"].length/2 -1)
+        console.log(i/2, "/", data["seeds"].length/2 -1)
         //console.log(data["seeds"][i], data["seeds"][i +1])
         for (let j = data["seeds"][i]; j < data["seeds"][i] + data["seeds"][i +1]; j++) {
 
