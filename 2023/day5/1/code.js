@@ -252,33 +252,57 @@ maps = [];
 
 function clac(input){
     data = creat_map(input);
-    console.log("data")
+
 
     endData = [];
     data["seeds"].forEach(seed => {
-        console.log(seed)
+        // console.log(seed)
+
         x = seed;
         maps.forEach(map => {
             map_name = map.split(' map:')[0]
             if(map.split(':')[1].length > 0){ //seed
             } else {
-                
-                if(data[map_name][x] == undefined){
-                    // x = x
-                } else {
-                    x = data[map_name][x];
-                }
+                //? suche die zahl, welche kleiner gleich seed ist
+                // console.log(map_name)
+                x_old = x;
+                for (let index = 0; index < data[map_name].length; index++) {
 
-                console.log(map_name, x)
+                    if(data[map_name][index][0] <= x){
+                        // console.log(":", data[map_name][index][0], '<=', x, data[map_name][index])
+
+                        range_start = data[map_name][index][1][0];
+                        source_range_start = data[map_name][index][1][1];
+                        range_length = data[map_name][index][1][2];
+                        // console.log("a", range_start, source_range_start, range_length)
+
+                        if(source_range_start + range_length -1 < x){
+                            // x = x;
+                        } else {
+                            //console.log(".")
+                            // y = source_range_start - range_start
+                            // z = x - y
+                            x = x + (range_start - source_range_start);
+                        }
+                        //console.log(x, y, z)
+
+                        break;
+                    }
+                    
+                }
+                // console.log(x_old, '=>', x)
+                // console.log(" ")
+
             }
         });
 
+        // console.log("----------------")
         endData.push(x);
     });
 
+    console.log(endData)
     min = Math.min(...endData)
-    console.log(min)
-    return endData;
+    return min;
 }
 
 function creat_map(input){
@@ -291,6 +315,7 @@ function creat_map(input){
         }
     });
     // console.log(maps)
+
 
 
     //? Seeds
@@ -317,9 +342,21 @@ function creat_map(input){
         if(next_map != undefined){
             str = str.split(next_map)[0];
         }
-        //console.log(str)
+        lines = str.split('\n');
+        lines.forEach(line => {
+            if(line != ''){
+                line_split = line.split(' ');
+                range_start = Number(line_split[0]);
+                source_range_start = Number(line_split[1]);
+                range_length = Number(line_split[2]);
+    
+                data[current_map_name].push([source_range_start, [range_start, source_range_start, range_length]]);
+            }
+        });
+        //console.log(data[current_map_name])
+        data[current_map_name].sort((x, y) => x[0] - y[0]).reverse();
         
-        data[current_map_name] = map_this(str);
+        //data[current_map_name] = map_this(str);
     }
 
     return data;
