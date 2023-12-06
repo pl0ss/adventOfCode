@@ -51,20 +51,11 @@ function parse_line(str){
     arr = [];
     str = str.split(":")[1]
 
-    current_int = "";
-    for (let index = 0; index < str.length +1; index++) {
-        if(str[index] == " " || str[index] == undefined){
-            if(current_int != ""){
-                arr.push(Number(current_int));
-                current_int = "";
-            }
-        } else {
-            current_int = `${current_int}${str[index]}`
-        }
-    }
+    str = str.replace(/ /gi, '');
+    arr.push(str)
 
     return arr;
 }
 
 
-console.log(calc(input)) // 633080
+console.log(calc(input)) // 20048741
