@@ -1,10 +1,11 @@
+i  Meine Antw.  Richtig Dauer   Wo      Richtige Antw.
 0: 1880769172   Nein    5min    Firefox
 1: 384658003    Nein    10min   Firefox  
 2: 1531539628   Nein    6min    Chrome
 3: 318728750    Nein    11min   VSC
-4: 487733519    Nein    7min    Firefox
+4: 487733519    Nein    7min    Firefox 469381783
 5: 1165763062   Nein    13min   Safari
 6: 95181345     Nein    10min   Chrome
-7: 115321831    Nein    12min   Safari
+7: 115321831    Nein    12min   Safari  1314084048
 8: 190399026    Nein    15min   VSC
-9: 10247563     Nein    63min   Firefox
+9: 10247563     Nein    63min   Firefox 37384986
