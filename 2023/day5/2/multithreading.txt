@@ -8,4 +8,4 @@ i  Meine Antw.  Richtig Dauer   Wo      Richtige Antw.
 6: 95181345     Nein    10min   Chrome
 7: 115321831    Nein    12min   Safari  1314084048
 8: 190399026    Nein    15min   VSC
-9: 10247563     Nein    63min   Firefox 37384986
+9: 10247563     Nein    63min   Firefox 37384986    seeds: 883000000 1000000 
