@@ -1026,7 +1026,7 @@ function calc(input) {
     //? sum berechen
     sum = 0;
     for (let index = 0; index < data_sorted.length; index++) {
-        console.log(data_sorted[index])
+        // console.log(data_sorted[index])
         sum += (index +1)* data_sorted[index][1];
     }
 
