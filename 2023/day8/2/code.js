@@ -783,31 +783,54 @@ function clac(input){
         }
     }
 
-    var z_count;
-    next_arr_len = next_arr.length;
-    for (index = 0; z_count != next_arr_len; index++) {
-        // console.log(next_arr, instructions[index % instructions.length], z_count)
-        z_count = 0;
-        instruction = instructions[index % instructions.length];
-        instruction_i = 0;
-        if(instruction == "R"){instruction_i = 1;}
+    z_indexes = [];
 
-        for (let node_index = 0; node_index < next_arr.length; node_index++) {
+    for (let node_index = 0; node_index < next_arr.length; node_index++) {
+        node = next_arr[node_index];
+
+        for (let index = 0; true; index++) {
+            instruction = instructions[index % instructions.length];
+            instruction_i = 0;
+            if(instruction == "R"){instruction_i = 1;}
+
             next_arr[node_index] = data[next_arr[node_index]][instruction_i];
-            // console.log(data[next_arr[node_index]], instruction_i)
-            
             if(next_arr[node_index][2] == 'Z'){
-                z_count ++;
+                console.log(index)
+                z_indexes.push(index +1)
+                break;
             }
-            // console.log(node_index, next_arr[node_index][2], z_count)
         }
-        // console.log(" ")
-        if(index % 100_000_000 == 0){
-            console.log(index)
-        }
+        // next_arr[node_index] = datas[next_arr[node_index]][instruction_i];
+        // // console.log(data[next_arr[node_index]], instruction_i)
+        
+        // if(next_arr[node_index][2] == 'Z'){
+        //     z_count ++;
+        // }
+        // // console.log(node_index, next_arr[node_index][2], z_count)
+
+
+        // for (index = 0; z_count != next_arr_len; index++) {
+        //     // console.log(next_arr, instructions[index % instructions.length], z_count)
+        //     z_count = 0;
+
+    
+    
+        //     // console.log(" ")
+        //     if(index % 100_000_000 == 0){
+        //         console.log(index)
+        //     }
+        // }
     }
 
-    return index;
+    
+
+    sum = 1;
+    for (let index = 0; index < z_indexes.length; index++) {
+        sum *= z_indexes[index]
+    }
+    console.log(`Eine große mögliche Lösung wäre: ${sum}`);
+
+    return findLCM(z_indexes);
 }
 
 function parse_inpit(input){
@@ -826,5 +849,34 @@ function parse_inpit(input){
 
     return [instructions, data];
 }
+
+//* Von GPT
+// Funktion zur Berechnung des größten gemeinsamen Teilers (GCD)
+function gcd(a, b) {
+    return b === 0 ? a : gcd(b, a % b);
+}
+
+// Funktion zur Berechnung des kleinsten gemeinsamen Vielfachen (LCM)
+function lcm(a, b) {
+    return (a * b) / gcd(a, b);
+}
+
+// Funktion zur Berechnung des LCM für ein Array von Zahlen
+function findLCM(arr) {
+    // Wenn das Array weniger als zwei Elemente enthält, gibt es nichts zu berechnen
+    if (arr.length < 2) {
+        return null;
+    }
+
+    // Reduziere das Array auf das LCM
+    var result = arr.reduce(function (accumulator, currentValue) {
+        return lcm(accumulator, currentValue);
+    });
+
+    return result;
+}
+
+// Beispielaufruf
+
 
 console.log(clac(input));
